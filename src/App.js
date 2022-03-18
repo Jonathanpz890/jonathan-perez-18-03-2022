@@ -8,7 +8,7 @@ const App = () => {
 
     const renderComponent = (component) => {
         return(
-            <div className="container">
+            <div className="Container">
                 <Navbar />
                 {component}
             </div>
