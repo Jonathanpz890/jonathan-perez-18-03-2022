@@ -1,12 +1,18 @@
 import logo from './logo.svg';
-import './App.css';
+import './scss/main.scss';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { routes } from './pages';
+import Navbar from './components/Navbar';
 
 const App = () => {
 
     const renderComponent = (component) => {
-        return component;
+        return(
+            <div className="container">
+                <Navbar />
+                {component}
+            </div>
+        )
     }
     return (
         <Router>
