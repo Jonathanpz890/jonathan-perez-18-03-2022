@@ -2,8 +2,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-}
-.react-tabs {
+
     min-height: 100%;
     display: flex;
     flex-direction: column;
@@ -12,35 +11,49 @@
     row-gap: 25px;
     padding: 25px;
 
-
-    &__tab-list {
+    &__toolbar {
         display: flex;
-        padding: 15px;
-        margin: 0;
-        width: fit-content;
-        background-color: white;
-        border-radius: 100px;
-        border: 1px solid rgba(0, 0, 0, 0.3);
-        column-gap: 20px;
+        width: 80%;
+        align-items: center;
+        justify-content: center;
+        position: relative;
 
-        .divider {
-            height: 100%;
-            width: 1px;
-            background-color: rgba(0, 0, 0, 0.3);
-            // list-style-type: none;
+        &__new-item-button {
+            position: absolute !important;
+            right: 0 !important;
+        }
+
+        &__tab-list {
+            display: flex;
+            padding: 15px;
+            margin: 0;
+            width: fit-content;
+            background-color: white;
+            border-radius: 100px;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            column-gap: 20px;
+
+            .divider {
+                height: 100%;
+                width: 1px;
+                background-color: rgba(0, 0, 0, 0.3);
+                // list-style-type: none;
+            }
+        }
+        &__tab {
+            border: 0;
+            background: 0;
+            list-style-type: none;
+            outline: none;
+            cursor: pointer;
+    
+            &.selected {
+                font-weight: 800;
+            }
         }
     }
-    &__tab {
-        list-style-type: none;
-        outline: none;
-        cursor: pointer;
-
-        &--selected {
-            font-weight: 800;
-        }
-    }
-    &__tab-panel {
-        display: none;
+    .grid {
+        display: flex;
         justify-content: center;
         align-items: center;
         width: 80%;
@@ -48,9 +61,5 @@
         background-color: white;
         border-radius: 10px;
         overflow: hidden;
-
-        &--selected {
-            display: flex;
-        }
     }
 }

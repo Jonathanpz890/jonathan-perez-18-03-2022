@@ -10,3 +10,12 @@ html, body, #root {
     display: flex;
     flex-direction: column;
 }
+.MuiTextField-root {
+    width: 100%;
+}
+.react-datepicker-wrapper {
+    input {
+        width: 100%;
+        margin: 5px 0;
+    }
+}

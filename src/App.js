@@ -1,4 +1,5 @@
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "react-datepicker/dist/react-datepicker.css";
 import './scss/main.scss';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { routes } from './pages';
