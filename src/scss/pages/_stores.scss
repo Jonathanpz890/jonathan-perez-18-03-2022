@@ -1,0 +1,18 @@
+.Stores {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+
+    .grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        height: 500px;
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+}

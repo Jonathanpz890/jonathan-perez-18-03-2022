@@ -3,7 +3,7 @@ import * as types from '../types/products';
 const initialState = {
     loading: false,
     products: [],
-    archivedItems: [],
+    archivedProducts: [],
 }
 
 export default function products(state = initialState, action) {
@@ -32,16 +32,16 @@ export default function products(state = initialState, action) {
                 ...state,
                 loading: false,
                 products: newProducts,
-                archivedItems: [archivedItem[0], ...state.archivedItems]
+                archivedProducts: [archivedItem[0], ...state.archivedProducts]
             }
         case types.UNARCHIVE_PRODUCT:
-            const newArchivedItems = [...state.archivedItems];
-            const unarchivedItem = newArchivedItems.splice(state.archivedItems.findIndex(product => product.id === action.payload.id), 1);
+            const newArchivedItems = [...state.archivedProducts];
+            const unarchivedItem = newArchivedItems.splice(state.archivedProducts.findIndex(product => product.id === action.payload.id), 1);
             return {
                 ...state,
                 loading: false,
                 products: [unarchivedItem[0], ...state.products].sort((a, b) => a.date - b.date),
-                archivedItems: newArchivedItems
+                archivedProducts: newArchivedItems
             }
         default:
             return state;

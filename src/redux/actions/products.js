@@ -29,7 +29,6 @@ export const getProducts = () => async (dispatch) => {
     }
 }
 export const addProduct = (data) => (dispatch) => {
-    console.log(data);
     dispatch({
         type: types.ADD_PRODUCT,
         payload: {

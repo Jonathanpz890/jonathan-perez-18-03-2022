@@ -1,13 +1,13 @@
-import { Button, TextField } from '@mui/material';
+import { Autocomplete, Button, Collapse, IconButton, TextField } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, FormGroup, Modal, ModalBody, ModalHeader } from 'reactstrap';
-import { createMessage } from 'src/redux/actions/message';
 import { v4 as uuidv4 } from 'uuid';
 import { addProduct, archiveProduct, getProducts, unarchiveProduct } from '../redux/actions/products';
 import { convertToDate } from '../utils/utils';
+import { BsSearch } from 'react-icons/bs';
 
 
 const Products = () => {
@@ -16,6 +16,8 @@ const Products = () => {
 
     const [tabIndex, setTabIndex] = useState(0)
     const [newProductModal, setNewProductModal] = useState(false)
+    const [filterBar, setFilterBar] = useState(false)
+    const [filter, setFilter] = useState('')
     const [newProductData, setNewProductData] = useState({
         id: uuidv4(),
         name: '',
@@ -25,7 +27,9 @@ const Products = () => {
     })
 
     useEffect(() => {
-        dispatch(getProducts())
+        if (!products.length) {
+            dispatch(getProducts());
+        }
     }, [])
 
     const renderArchiveButton = (value) => {
@@ -45,16 +49,24 @@ const Products = () => {
             date: new Date()
         })
         setNewProductModal(false);
-        dispatch(createMessage('meow nigga'))
     }
 
     return (
         <div className='Products'>
             <div className="Products__toolbar">
+                <IconButton classes={{root: 'Products__toolbar__search-button'}} aria-label='search' onClick={() => setFilterBar(!filterBar)}>
+                    <BsSearch />
+                </IconButton>
                 <div className='Products__toolbar__tab-list'>
-                    <button onClick={() => setTabIndex(0)} className={`Products__toolbar__tab${tabIndex === 0 ? ' selected' : ''}`}>On Delivery</button>
+                    <button onClick={() => {
+                        setTabIndex(0)
+                        setFilterBar(false)
+                    }} className={`Products__toolbar__tab${tabIndex === 0 ? ' selected' : ''}`}>On Delivery</button>
                     |
-                    <button onClick={() => setTabIndex(1)} className={`Products__toolbar__tab${tabIndex === 1 ? ' selected' : ''}`}>Archived</button>
+                    <button onClick={() => {
+                        setTabIndex(1) 
+                        setFilterBar(false)
+                    }} className={`Products__toolbar__tab${tabIndex === 1 ? ' selected' : ''}`}>Archived</button>
                 </div>
                 {tabIndex === 0 &&
                     <Button 
@@ -66,6 +78,18 @@ const Products = () => {
                     </Button>
                 }
             </div>
+            <Collapse classes={{root: 'Products__collapse'}} in={filterBar}>
+            <Autocomplete
+                openOnFocus={false}
+                disablePortal
+                id="combo-box-demo"
+                options={(tabIndex === 0 ? products : archivedProducts)?.map(product => product.name)}
+                sx={{ width: 300, backgroundColor: 'white' }}
+                renderInput={(params) => <TextField {...params} label="Filter" />}
+                onInputChange={(e, value) => setFilter(value)}
+                onMouseDownCapture={(e) => e.stopPropagation()}
+            />
+            </Collapse>
             <div className="grid">
                 <DataGrid
                     columns={[
@@ -81,10 +105,16 @@ const Products = () => {
                             }
                         }},
                     ]}
-                    rows={(tabIndex === 0 ? products : archivedProducts).map((product, index) => {
+                    rows={(tabIndex === 0 ? products : archivedProducts).filter(product => {
+                        if (filter) {
+                            return product.name.toLowerCase().includes(filter.toLowerCase());
+                        } else {
+                            return true
+                        }
+                    }).map((product, index) => {
                         return {
                             id: product.id,
-                            key: index,
+                            key: product.id,
                             name: product.name,
                             price: product.price,
                             store: product.store,
