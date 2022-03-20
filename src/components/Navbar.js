@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { routes } from '../pages';
-import { Autocomplete, TextField } from '@mui/material';
+import Currency from './Currency';
 
 const Navbar = () => {
     const { pathname } = useLocation();
@@ -18,6 +18,9 @@ const Navbar = () => {
                         {route.name}
                     </a>
                 )}
+            </div>
+            <div className="Navbar__currency-conversion">
+                <Currency />
             </div>
         </div>
     )

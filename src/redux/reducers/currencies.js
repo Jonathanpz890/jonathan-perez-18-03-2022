@@ -4,6 +4,7 @@ const initialState = {
     loading: false,
     currencyList: [],
     currency: '',
+    currencyRates: [],
 }
 
 export default function currencies(state = initialState, action) {
@@ -17,6 +18,16 @@ export default function currencies(state = initialState, action) {
                 ...state,
                 loading: false,
                 currencyList: action.payload.currencyList
+            }
+        case types.GET_CURRENCY_RATES_ATTEMPT:
+            return { ...state, loading: true }
+        case types.GET_CURRENCY_RATES_FAIL:
+            return { ...state, loading: false }
+        case types.GET_CURRENCY_RATES_SUCCESS:
+            return { 
+                ...state,
+                loading: false,
+                currencyRates: action.payload.currencyRates
             }
         case types.SET_CURRENCY:
             return {

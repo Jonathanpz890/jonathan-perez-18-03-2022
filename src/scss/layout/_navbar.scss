@@ -2,10 +2,13 @@
     width: 100vw;
     background-color: #11468F;
     color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
     
     &__routes {
         display: flex;
-        padding: 10px;
         column-gap: 10px;
 
         &__route {

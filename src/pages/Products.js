@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, FormGroup, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { addProduct, archiveProduct, getProducts, unarchiveProduct } from '../redux/actions/products';
-import { convertToDate } from '../utils/utils';
+import { convertToDate, currencyConverter } from '../utils/utils';
 import { BsSearch } from 'react-icons/bs';
+import CurrencyList from 'currency-list';
 
 
 const Products = () => {
@@ -37,6 +38,9 @@ const Products = () => {
     }
     const renderUnarchiveButton = (value) => {
         return <Button color='secondary' variant='outlined' onClick={() => dispatch(unarchiveProduct(value.row.id))}>Unarchive</Button>
+    }
+    const convertCurrency = (initialPrice) => {
+        return initialPrice
     }
     const addNewProduct = (e) => {
         e.preventDefault();
@@ -94,7 +98,7 @@ const Products = () => {
                 <DataGrid
                     columns={[
                         { field: 'name', headerName: 'Name', flex: 1 },
-                        { field: 'price', headerName: 'Price', width: 150, valueFormatter: (price) => `$${price.value}` },
+                        { field: 'price', headerName: 'Price', width: 150, valueFormatter: (price) => convertCurrency(price.value)},
                         { field: 'store', headerName: 'Store', width: 150 },
                         { field: 'date', headerName: 'Estimated delivery', width: 150, valueFormatter: (date) => convertToDate(date.value)},
                         { field: 'actions', headerName: 'Actions', width: 150, sortable: false, filterable: false, renderCell: (value) => {
