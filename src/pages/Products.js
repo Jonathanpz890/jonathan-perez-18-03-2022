@@ -4,18 +4,19 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, FormGroup, Modal, ModalBody, ModalHeader } from 'reactstrap';
+import { createMessage } from 'src/redux/actions/message';
 import { v4 as uuidv4 } from 'uuid';
-import { addItem, archiveItem, getItems, unarchiveItem } from '../redux/actions/items';
+import { addProduct, archiveProduct, getProducts, unarchiveProduct } from '../redux/actions/products';
 import { convertToDate } from '../utils/utils';
 
 
-const ByItem = () => {
+const Products = () => {
     const dispatch = useDispatch();
-    const { items, archivedItems } = useSelector(state => state.items);
+    const { products, archivedProducts } = useSelector(state => state.products);
 
     const [tabIndex, setTabIndex] = useState(0)
-    const [newItemModal, setNewItemModal] = useState(false)
-    const [newItemData, setNewItemData] = useState({
+    const [newProductModal, setNewProductModal] = useState(false)
+    const [newProductData, setNewProductData] = useState({
         id: uuidv4(),
         name: '',
         price: '',
@@ -24,43 +25,44 @@ const ByItem = () => {
     })
 
     useEffect(() => {
-        dispatch(getItems())
+        dispatch(getProducts())
     }, [])
 
     const renderArchiveButton = (value) => {
-        return <Button color='primary' variant='contained' onClick={() => dispatch(archiveItem(value.row.id))}>Archive</Button>
+        return <Button color='primary' variant='contained' onClick={() => dispatch(archiveProduct(value.row.id))}>Archive</Button>
     }
     const renderUnarchiveButton = (value) => {
-        return <Button color='secondary' variant='outlined' onClick={() => dispatch(unarchiveItem(value.row.id))}>Unarchive</Button>
+        return <Button color='secondary' variant='outlined' onClick={() => dispatch(unarchiveProduct(value.row.id))}>Unarchive</Button>
     }
-    const addNewItem = (e) => {
+    const addNewProduct = (e) => {
         e.preventDefault();
-        dispatch(addItem(newItemData))
-        setNewItemData({
+        dispatch(addProduct(newProductData))
+        setNewProductData({
             id: uuidv4(),
             name: '',
             price: '',
             store: '',
             date: new Date()
         })
-        setNewItemModal(false);
+        setNewProductModal(false);
+        dispatch(createMessage('meow nigga'))
     }
 
     return (
-        <div className='By-item'>
-            <div className="By-item__toolbar">
-                <div className='By-item__toolbar__tab-list'>
-                    <button onClick={() => setTabIndex(0)} className={`By-item__toolbar__tab${tabIndex === 0 ? ' selected' : ''}`}>On Delivery</button>
+        <div className='Products'>
+            <div className="Products__toolbar">
+                <div className='Products__toolbar__tab-list'>
+                    <button onClick={() => setTabIndex(0)} className={`Products__toolbar__tab${tabIndex === 0 ? ' selected' : ''}`}>On Delivery</button>
                     |
-                    <button onClick={() => setTabIndex(1)} className={`By-item__toolbar__tab${tabIndex === 1 ? ' selected' : ''}`}>Archived</button>
+                    <button onClick={() => setTabIndex(1)} className={`Products__toolbar__tab${tabIndex === 1 ? ' selected' : ''}`}>Archived</button>
                 </div>
                 {tabIndex === 0 &&
                     <Button 
-                        classes={{root: 'By-item__toolbar__new-item-button'}}
+                        classes={{root: 'Products__toolbar__new-product-button'}}
                         color='success' 
-                        onClick={() => setNewItemModal(true)}
+                        onClick={() => setNewProductModal(true)}
                     >
-                        Add new item
+                        Add new product
                     </Button>
                 }
             </div>
@@ -79,38 +81,38 @@ const ByItem = () => {
                             }
                         }},
                     ]}
-                    rows={(tabIndex === 0 ? items : archivedItems).map((item, index) => {
+                    rows={(tabIndex === 0 ? products : archivedProducts).map((product, index) => {
                         return {
-                            id: item.id,
+                            id: product.id,
                             key: index,
-                            name: item.name,
-                            price: item.price,
-                            store: item.store,
-                            date: item.date,
+                            name: product.name,
+                            price: product.price,
+                            store: product.store,
+                            date: product.date,
                         }
                     })}
                     pageSize={10}
                     rowsPerPageOptions={[10]}
                 />
             </div>
-            <Modal isOpen={newItemModal} toggle={() => setNewItemModal(false)} onClose={() => alert('nigga')}>
-                <ModalHeader tag='h3' toggle={() => setNewItemModal(false)}>Add new item</ModalHeader>
+            <Modal isOpen={newProductModal} toggle={() => setNewProductModal(false)} onClose={() => alert('nigga')}>
+                <ModalHeader tag='h3' toggle={() => setNewProductModal(false)}>Add new product</ModalHeader>
                 <ModalBody>
-                    <Form onSubmit={addNewItem}>
+                    <Form onSubmit={addNewProduct}>
                         <FormGroup>
                             <TextField 
                                 id='name'
                                 label='Name'
-                                value={newItemData.name}
-                                onChange={(e) => setNewItemData({ ...newItemData, name: e.target.value })}
+                                value={newProductData.name}
+                                onChange={(e) => setNewProductData({ ...newProductData, name: e.target.value })}
                             />
                         </FormGroup>
                         <FormGroup>
                             <TextField
                                 id='store'
                                 label='Store'
-                                value={newItemData.store}
-                                onChange={(e) => setNewItemData({ ...newItemData, store: e.target.value })}
+                                value={newProductData.store}
+                                onChange={(e) => setNewProductData({ ...newProductData, store: e.target.value })}
                             />
                         </FormGroup>
                         <FormGroup>
@@ -118,16 +120,16 @@ const ByItem = () => {
                                 id='price'
                                 type='number'
                                 label='Price (in USD)'
-                                value={newItemData.price}
-                                onChange={(e) => setNewItemData({ ...newItemData, price: e.target.value })}
+                                value={newProductData.price}
+                                onChange={(e) => setNewProductData({ ...newProductData, price: e.target.value })}
                             />
                         </FormGroup>
                         <FormGroup>
-                            <label for='date'>Estimated date of delivery:</label>
-                            <DatePicker selected={newItemData.date} onChange={(date) => setNewItemData({ ...newItemData, date: date.getTime() })} />
+                            <label htmlFor='date'>Estimated date of delivery:</label>
+                            <DatePicker selected={newProductData.date} onChange={(date) => setNewProductData({ ...newProductData, date: date.getTime() })} />
                         </FormGroup>
                         <FormGroup style={{textAlign: 'center'}}>
-                            <Button color='success' type='submit' disabled={!newItemData.name || !newItemData.price || !newItemData.store || !newItemData.date}>Add</Button>
+                            <Button color='success' type='submit' disabled={!newProductData.name || !newProductData.price || !newProductData.store || !newProductData.date}>Add</Button>
                         </FormGroup>
                     </Form>
                 </ModalBody>
@@ -136,4 +138,4 @@ const ByItem = () => {
     )
 }
 
-export default ByItem;
+export default Products;

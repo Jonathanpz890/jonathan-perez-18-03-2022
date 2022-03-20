@@ -1,4 +1,4 @@
-export const fakeItemData = [
+export const fakeProductData = [
     {
         date: 1648133700000,
         store: 'Amazon',

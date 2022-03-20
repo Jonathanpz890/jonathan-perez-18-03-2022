@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
-import items from './items';
+import products from './products';
+import message from './message';
 
 
 const rootReducer = combineReducers({
-    items
+    products,
+    message
 })
 
 export default rootReducer;

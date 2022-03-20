@@ -4,14 +4,16 @@ import './scss/main.scss';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { routes } from './pages';
 import Navbar from './components/Navbar';
+import useMessage from './hooks/useMessage';
 
 const App = () => {
-
+    const message = useMessage();
     const renderComponent = (component) => {
         return(
             <div className="Container">
                 <Navbar />
                 {component}
+                {message}
             </div>
         )
     }
@@ -26,7 +28,7 @@ const App = () => {
                         element={renderComponent(route.component)}
                     />
                 )}
-                <Route path='*' element={<Navigate to='/by-item' />} />
+                <Route path='*' element={<Navigate to='/products' />} />
             </Routes>
         </Router>
     );

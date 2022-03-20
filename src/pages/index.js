@@ -1,15 +1,15 @@
-import ByItem from './ByItem';
-import ByStore from './ByStore';
+import Products from './Products';
+import Stores from './Stores';
 
 export const routes = [
     {
         name: 'Purchase By Item',
-        path: '/by-item',
-        component: <ByItem />
+        path: '/products',
+        component: <Products />
     },
     {
         name: 'Purchase By Store',
-        path: '/by-store',
-        component: <ByStore />
+        path: '/stores',
+        component: <Stores />
     }
 ]
