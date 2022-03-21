@@ -8,14 +8,15 @@ const Currency = () => {
     const { currencyList, currency } = useSelector(state => state.currencies)
 
     useEffect(() => {
-        //TODO: bring back to life
-        // dispatch(getCurrencyRates());
+        dispatch(getCurrencyRates());
         if (!currencyList.length) {
             dispatch(getCurrencyList())
         }
     }, [])
     useEffect(() => {
-        dispatch(setCurrency(currencyList.find(currency => currency.value === 'USD')))
+        if (!currency) {
+            dispatch(setCurrency(currencyList.find(currency => currency.value === 'USD')))
+        }
     }, [currencyList])
 
     return(

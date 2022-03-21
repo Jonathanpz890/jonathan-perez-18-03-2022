@@ -8,12 +8,13 @@ const { useDispatch, useSelector } = require("react-redux")
 const useMessage = () => {
     const dispatch = useDispatch()
     const { message } = useSelector(state => state.message)
+    const { darkMode } = useSelector(state => state.darkMode)
 
     const [messageWrapper, setMessageWrapper] = useState(null)
 
     useEffect(() => {
         setMessageWrapper(
-            <Modal className='message-modal' isOpen={!!message} toggle={() => dispatch(removeMessage())}>
+            <Modal className={`message-modal${darkMode ? ' dark-mode' : ''}`} isOpen={!!message} toggle={() => dispatch(removeMessage())}>
                 <ModalHeader toggle={() => dispatch(removeMessage())}>Message</ModalHeader>
                 <ModalBody>
                     {message}

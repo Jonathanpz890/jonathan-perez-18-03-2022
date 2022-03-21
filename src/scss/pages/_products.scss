@@ -90,18 +90,4 @@
     }
     &__collapse {
     }
-    .grid {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 80%;
-        height: 500px;
-        background-color: white;
-        border-radius: 10px;
-        overflow: hidden;
-
-        @include respond(tablet) {
-            width: 100%;
-        }
-    }
 }

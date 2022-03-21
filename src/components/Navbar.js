@@ -1,13 +1,19 @@
+import { IconButton } from '@mui/material';
 import { Spin as Hamburger } from 'hamburger-react';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Collapse, Nav, Navbar as Navigation, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { routes } from '../pages';
+import { toggleDarkMode } from '../redux/actions/darkMode';
 import Currency from './Currency';
+import { MdDarkMode, MdLightMode } from 'react-icons/md';
 
 
 const Navbar = () => {
     const { pathname } = useLocation();
+    const dispatch = useDispatch();
+    const { darkMode } = useSelector(state => state.darkMode)
     const [expandNavbar, setExpandNavbar] = useState(false)
 
     return (
@@ -31,6 +37,9 @@ const Navbar = () => {
                     )}
                 </Nav>
                 <div className="navbar__currency-conversion">
+                    <IconButton classes={{root: 'dark-mode-toggle'}} onClick={() => dispatch(toggleDarkMode())}>
+                        { darkMode ? <MdLightMode color='white' /> : <MdDarkMode color='white' />}
+                    </IconButton>
                     <Currency />
                 </div>
             </Collapse>

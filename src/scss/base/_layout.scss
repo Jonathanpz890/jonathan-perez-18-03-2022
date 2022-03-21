@@ -2,6 +2,14 @@ html, body, #root {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
+
+    * {
+        transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+    }
+}
+.App {
+    width: 100%;
+    height: 100%;
 }
 .Container {
     width: 100%;
@@ -17,5 +25,27 @@ html, body, #root {
     input {
         width: 100%;
         margin: 5px 0;
+        padding: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.23);
+        border-radius: 5px;
+    }
+}
+
+.grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    min-height: 500px;
+    height: 70vh;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;        
+
+    @include respond(tablet) {
+        width: 100%;
+    }
+    .MuiDataGrid-root {
+        border-radius: 10px;
     }
 }

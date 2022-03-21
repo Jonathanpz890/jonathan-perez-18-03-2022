@@ -14,6 +14,7 @@ import { convertToDate } from '../utils/utils';
 const Products = () => {
     const dispatch = useDispatch();
     const { products, archivedProducts } = useSelector(state => state.products);
+    const { darkMode } = useSelector(state => state.darkMode);
 
     const [tabIndex, setTabIndex] = useState(0)
     const [newProductModal, setNewProductModal] = useState(false)
@@ -105,7 +106,7 @@ const Products = () => {
                 <DataGrid
                     columns={[
                         { field: 'name', headerName: 'Name', flex: 1, minWidth: 150 },
-                        { field: 'price', headerName: 'Price', width: 70, renderCell: (price) => <PriceFormat initialPrice={price.value} />},
+                        { field: 'price', headerName: 'Price', width: 100, renderCell: (price) => <PriceFormat initialPrice={price.value} />},
                         { field: 'store', headerName: 'Store', width: 100 },
                         { field: 'date', headerName: 'EST delivery', width: 120, valueFormatter: (date) => convertToDate(date.value)},
                         { field: 'actions', headerName: 'Actions', width: 150, sortable: false, filterable: false, renderCell: (value) => {
@@ -136,7 +137,7 @@ const Products = () => {
                     rowsPerPageOptions={[10]}
                 />
             </div>
-            <Modal isOpen={newProductModal} toggle={() => setNewProductModal(false)} onClose={() => alert('nigga')}>
+            <Modal className={darkMode ? 'dark-mode' : ''} isOpen={newProductModal} toggle={() => setNewProductModal(false)} onClose={() => alert('nigga')}>
                 <ModalHeader tag='h3' toggle={() => setNewProductModal(false)}>Add new product</ModalHeader>
                 <ModalBody>
                     <Form onSubmit={addNewProduct}>

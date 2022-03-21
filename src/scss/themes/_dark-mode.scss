@@ -1,0 +1,64 @@
+.dark-mode {
+    * {
+        color: white;
+    }
+    .navbar {
+        .Currency {
+            * {
+                color: white;
+            }
+            .select {
+
+                &__control {
+                    background-color: $darker;
+                    border-color: $dark-border;
+                }
+                &__menu-list {
+                    background-color: $darker;
+                }
+                &__option--is-focused {
+                    background-color: $dark;
+                }
+            }
+
+        }
+    }
+    .Container {
+        background-color: $dark !important;
+        
+        .grid {
+            background-color: $darker !important;
+
+            * {
+                border-color: $dark-border !important;
+            }
+            .MuiDataGrid-virtualScrollerContent {
+                background-color: $darker;
+                color: white;
+            }
+        }
+        .Products__toolbar__tab-list {
+            background-color: $darker !important;
+            border-color: $dark-border;
+        }
+    }
+    .modal-content {
+        background-color: $dark;
+        * {
+            color: white;
+        }
+        .MuiOutlinedInput-notchedOutline { 
+            border-color: $dark-border;
+        }
+        .MuiOutlinedInput-root {
+            background-color: $darker;
+        }
+        .react-datepicker-wrapper  {
+            input {
+                background-color: $darker;
+                border-color: $dark-border;
+            }
+
+        }
+    }
+}
