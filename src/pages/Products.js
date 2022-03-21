@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import { BsSearch } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, FormGroup, Modal, ModalBody, ModalHeader } from 'reactstrap';
+import Loading from 'src/components/Loading';
 import PriceFormat from 'src/components/PriceFormat';
 import { v4 as uuidv4 } from 'uuid';
 import { addProduct, archiveProduct, getProducts, unarchiveProduct } from '../redux/actions/products';
@@ -13,7 +14,7 @@ import { convertToDate } from '../utils/utils';
 
 const Products = () => {
     const dispatch = useDispatch();
-    const { products, archivedProducts } = useSelector(state => state.products);
+    const { loading, products, archivedProducts } = useSelector(state => state.products);
     const { darkMode } = useSelector(state => state.darkMode);
 
     const [tabIndex, setTabIndex] = useState(0)
@@ -56,6 +57,7 @@ const Products = () => {
 
     return (
         <div className='Products'>
+            <Loading loading={loading} />
             <div className="Products__toolbar">
                 <IconButton classes={{root: 'Products__toolbar__search-button'}} aria-label='search' onClick={() => setFilterBar(!filterBar)}>
                     <BsSearch />

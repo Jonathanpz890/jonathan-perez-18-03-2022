@@ -1,0 +1,29 @@
+.Loading {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s;
+    img {
+        width: 20%;
+        animation: breath 0.7s infinite alternate;
+
+        @include respond(phone) {
+            width: 60%;
+        }
+    }
+    @keyframes breath {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(1.2);
+        }
+    }
+}
