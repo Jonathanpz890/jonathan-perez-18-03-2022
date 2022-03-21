@@ -7,7 +7,7 @@ const PriceFormat = ({ initialPrice }) => {
     const convertedCurrency = useCurrencyConverter(initialPrice)
     
     return (
-        <p>{currency?.symbol} {parseInt(convertedCurrency).toLocaleString()}</p>
+        <p style={{margin: 0}}>{currency?.symbol} {parseInt(convertedCurrency).toLocaleString()}</p>
     )
 }
 
