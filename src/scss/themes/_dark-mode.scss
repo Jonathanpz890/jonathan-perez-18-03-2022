@@ -37,9 +37,29 @@
                 color: white;
             }
         }
-        .Products__toolbar__tab-list {
-            background-color: $darker !important;
-            border-color: $dark-border;
+        .Products {
+            &__toolbar__tab-list {
+                background-color: $darker !important;
+                border-color: $dark-border;
+            }
+            &__collapse {
+                .MuiAutocomplete-root {
+                    * {
+                        color: white;
+                    }
+                    background: $dark;
+
+                    .MuiOutlinedInput-notchedOutline {
+                        border-color: $dark-border;
+                    }
+                }
+                .MuiPaper-root {
+                    background-color: $dark;
+                }
+                .MuiAutocomplete-option.Mui-focused {
+                    background-color: $darker;
+                }
+            }
         }
     }
     .modal-content {
