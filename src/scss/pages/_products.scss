@@ -18,9 +18,32 @@
         justify-content: center;
         position: relative;
 
+        @include respond(tablet) {
+            width: 100%;
+        }
+
         &__new-product-button {
             position: absolute !important;
             right: 0 !important;
+            
+            @include respond(tablet) {
+                display: none !important;
+            }
+            
+            &--mobile {
+                display: none !important;
+                position: absolute !important;
+                right: 0 !important;
+                width: 60px;
+                height: 60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                @include respond(tablet) {
+                    display: block !important;
+                }
+            }
         }
         &__search-button {
             position: absolute !important;
@@ -36,6 +59,11 @@
             border-radius: 100px;
             border: 1px solid rgba(0, 0, 0, 0.3);
             column-gap: 20px;
+            
+            @include respond(phone) {
+                padding: 8px;
+                column-gap: 5px;
+            }
 
             .divider {
                 height: 100%;
@@ -54,6 +82,10 @@
             &.selected {
                 font-weight: 800;
             }
+
+            @include respond(phone) {
+                font-size: 1rem;
+            }
         }
     }
     &__collapse {
@@ -67,5 +99,9 @@
         background-color: white;
         border-radius: 10px;
         overflow: hidden;
+
+        @include respond(tablet) {
+            width: 100%;
+        }
     }
 }

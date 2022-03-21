@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import useCurrencyConverter from 'src/hooks/useCurrencyConverter';
 
@@ -7,7 +7,7 @@ const PriceFormat = ({ initialPrice }) => {
     const convertedCurrency = useCurrencyConverter(initialPrice)
 
     return (
-        <p>{currency.symbol} {convertedCurrency}</p>
+        <p>{currency?.symbol} {convertedCurrency}</p>
     )
 }
 

@@ -2,14 +2,13 @@ import { Autocomplete, Button, Collapse, IconButton, TextField } from '@mui/mate
 import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
+import { BsSearch } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, FormGroup, Modal, ModalBody, ModalHeader } from 'reactstrap';
+import PriceFormat from 'src/components/PriceFormat';
 import { v4 as uuidv4 } from 'uuid';
 import { addProduct, archiveProduct, getProducts, unarchiveProduct } from '../redux/actions/products';
-import { convertToDate, currencyConverter } from '../utils/utils';
-import { BsSearch } from 'react-icons/bs';
-import CurrencyList from 'currency-list';
-import PriceFormat from 'src/components/PriceFormat';
+import { convertToDate } from '../utils/utils';
 
 
 const Products = () => {
@@ -71,13 +70,23 @@ const Products = () => {
                     }} className={`Products__toolbar__tab${tabIndex === 1 ? ' selected' : ''}`}>Archived</button>
                 </div>
                 {tabIndex === 0 &&
-                    <Button 
-                        classes={{root: 'Products__toolbar__new-product-button'}}
-                        color='success' 
-                        onClick={() => setNewProductModal(true)}
-                    >
-                        Add new product
-                    </Button>
+                    <>
+                        <Button 
+                            classes={{root: 'Products__toolbar__new-product-button'}}
+                            color='success' 
+                            onClick={() => setNewProductModal(true)}
+                        >
+                            Add new product
+                        </Button>
+                        <IconButton
+                            classes={{root: 'Products__toolbar__new-product-button--mobile'}}
+                            color='success'
+                            onClick={() => setNewProductModal(true)}
+                            size='large'
+                        >
+                            +
+                        </IconButton>
+                    </>
                 }
             </div>
             <Collapse classes={{root: 'Products__collapse'}} in={filterBar}>
@@ -95,10 +104,10 @@ const Products = () => {
             <div className="grid">
                 <DataGrid
                     columns={[
-                        { field: 'name', headerName: 'Name', flex: 1 },
-                        { field: 'price', headerName: 'Price', width: 150, renderCell: (price) => <PriceFormat initialPrice={price.value} />},
-                        { field: 'store', headerName: 'Store', width: 150 },
-                        { field: 'date', headerName: 'Estimated delivery', width: 150, valueFormatter: (date) => convertToDate(date.value)},
+                        { field: 'name', headerName: 'Name', flex: 1, minWidth: 150 },
+                        { field: 'price', headerName: 'Price', width: 70, renderCell: (price) => <PriceFormat initialPrice={price.value} />},
+                        { field: 'store', headerName: 'Store', width: 100 },
+                        { field: 'date', headerName: 'EST delivery', width: 120, valueFormatter: (date) => convertToDate(date.value)},
                         { field: 'actions', headerName: 'Actions', width: 150, sortable: false, filterable: false, renderCell: (value) => {
                             if (tabIndex === 0) {
                                 return renderArchiveButton(value);

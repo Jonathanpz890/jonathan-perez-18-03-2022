@@ -10,7 +10,7 @@ const Currency = () => {
     useEffect(() => {
         //TODO: bring back to life
         // dispatch(getCurrencyRates());
-        if (!currencyList) {
+        if (!currencyList.length) {
             dispatch(getCurrencyList())
         }
     }, [])

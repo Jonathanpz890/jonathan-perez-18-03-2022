@@ -9,7 +9,7 @@ const useCurrencyConverter = (initialPrice) => {
         //Initial price is in USD, and currency rates are based on EUR
         //So first I convert initial price to EUR and then to the chosen currency
         const eurInitialPrice = initialPrice / currencyRates.USD;
-        setPrice((eurInitialPrice * currencyRates[currency.value]).toFixed())
+        setPrice((eurInitialPrice * currencyRates[currency?.value]).toFixed())
     }, [currency])
 
     return price
