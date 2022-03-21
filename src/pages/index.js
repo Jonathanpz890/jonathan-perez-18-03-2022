@@ -3,12 +3,12 @@ import Stores from './Stores';
 
 export const routes = [
     {
-        name: 'Purchase By Item',
+        name: 'Purchases By Item',
         path: '/products',
         component: <Products />
     },
     {
-        name: 'Purchase By Store',
+        name: 'Purchases By Store',
         path: '/stores',
         component: <Stores />
     }
