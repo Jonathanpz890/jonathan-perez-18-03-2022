@@ -26,6 +26,7 @@ export const getProducts = () => async (dispatch) => {
     } catch (error) {
         dispatch({ type: types.GET_PRODUCTS_FAIL})
         dispatch(createMessage('An error occured, please try again later'))
+        console.log(error);
     }
 }
 export const addProduct = (data) => (dispatch) => {
