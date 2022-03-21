@@ -1,5 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid';
 import React from 'react';
+import PriceFormat from 'src/components/PriceFormat';
 import useStoreDivider from 'src/hooks/useStoreDivider';
 
 const Stores = () => {
@@ -12,7 +13,8 @@ const Stores = () => {
                     columns={[
                         { field: 'store', headerName: 'Store', flex: 1 },
                         { field: 'quantity', headerName: 'Number of items', flex: 1 },
-                        { field: 'price', headerName: 'Sum of item prices', flex: 1, valueFormatter: (price) => `$${price.value}` },
+                        { field: 'price', headerName: 'Sum of item prices', flex: 1, renderCell: (price) => <PriceFormat initialPrice={price.value} /> },
+
                     ]}
                     rows={stores.map((store, index) => {
                         return {
