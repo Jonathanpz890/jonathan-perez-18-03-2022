@@ -26,7 +26,7 @@ export const getCurrencyRates = () => async (dispatch) => {
     dispatch({ type: types.GET_CURRENCY_RATES_ATTEMPT })
 
     try {
-        const response = await axios.get(`http://api.exchangeratesapi.io/v1/latest?access_key=${process.env.REACT_APP_CURRENCY_API_KEY}`)
+        const response = await axios.get(`https://api.exchangeratesapi.io/v1/latest?access_key=${process.env.REACT_APP_CURRENCY_API_KEY}`)
         if (response.data) {
             dispatch({
                 type: types.GET_CURRENCY_RATES_SUCCESS,
