@@ -64,11 +64,13 @@ const Products = () => {
                     <button onClick={() => {
                         setTabIndex(0)
                         setFilterBar(false)
+                        setFilter('');
                     }} className={`Products__toolbar__tab${tabIndex === 0 ? ' selected' : ''}`}>On Delivery</button>
                     |
                     <button onClick={() => {
                         setTabIndex(1) 
                         setFilterBar(false)
+                        setFilter('');
                     }} className={`Products__toolbar__tab${tabIndex === 1 ? ' selected' : ''}`}>Archived</button>
                 </div>
                 {tabIndex === 0 &&
