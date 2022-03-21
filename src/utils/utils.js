@@ -1,6 +1,3 @@
-import { useSelector } from "react-redux";
-import CurrencyList from 'currency-list'
-
 export const convertToDate = (timestamp) => {
     const date = new Date(timestamp);
     const month = date.toLocaleDateString('default', {month: 'long'})

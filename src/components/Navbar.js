@@ -36,10 +36,10 @@ const Navbar = () => {
                         </NavItem>
                     )}
                 </Nav>
+                <IconButton classes={{root: 'dark-mode-toggle'}} onClick={() => dispatch(toggleDarkMode())}>
+                    { darkMode ? <MdLightMode color='white' /> : <MdDarkMode color='white' />}
+                </IconButton>
                 <div className="navbar__currency-conversion">
-                    <IconButton classes={{root: 'dark-mode-toggle'}} onClick={() => dispatch(toggleDarkMode())}>
-                        { darkMode ? <MdLightMode color='white' /> : <MdDarkMode color='white' />}
-                    </IconButton>
                     <Currency />
                 </div>
             </Collapse>
