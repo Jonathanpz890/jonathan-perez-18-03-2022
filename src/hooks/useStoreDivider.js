@@ -22,6 +22,7 @@ const useStoreDivider = () => {
             store.id = uuidv4();
         })
         setStores(storeArray);
+        //eslint-disable-next-line
     }, [products])
 
     return stores;

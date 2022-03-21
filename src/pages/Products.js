@@ -32,6 +32,7 @@ const Products = () => {
         if (!products.length) {
             dispatch(getProducts());
         }
+        //eslint-disable-next-line
     }, [])
 
     const renderArchiveButton = (value) => {

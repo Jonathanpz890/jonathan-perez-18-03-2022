@@ -12,11 +12,13 @@ const Currency = () => {
         if (!currencyList.length) {
             dispatch(getCurrencyList())
         }
+        //eslint-disable-next-line
     }, [])
     useEffect(() => {
         if (!currency) {
             dispatch(setCurrency(currencyList.find(currency => currency.value === 'USD')))
         }
+        //eslint-disable-next-line
     }, [currencyList])
 
     return(

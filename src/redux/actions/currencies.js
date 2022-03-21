@@ -39,8 +39,7 @@ export const getCurrencyRates = () => async (dispatch) => {
         dispatch({ type: types.GET_CURRENCY_RATES_FAIL });
         dispatch(createMessage('An error has occoured, please try again later'))
     }
-    const TODO = 'bring back to life'
-    // setTimeout(() => {
-    //     dispatch(getCurrencyRates())
-    // }, 10000)
+    setTimeout(() => {
+        dispatch(getCurrencyRates())
+    }, 10000)
 }

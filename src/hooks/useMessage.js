@@ -22,6 +22,7 @@ const useMessage = () => {
                 </ModalBody>
             </Modal>
         )
+        //eslint-disable-next-line
     }, [message])
 
     return messageWrapper;
