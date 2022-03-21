@@ -9,6 +9,7 @@ import { addProduct, archiveProduct, getProducts, unarchiveProduct } from '../re
 import { convertToDate, currencyConverter } from '../utils/utils';
 import { BsSearch } from 'react-icons/bs';
 import CurrencyList from 'currency-list';
+import PriceFormat from 'src/components/PriceFormat';
 
 
 const Products = () => {
@@ -38,9 +39,6 @@ const Products = () => {
     }
     const renderUnarchiveButton = (value) => {
         return <Button color='secondary' variant='outlined' onClick={() => dispatch(unarchiveProduct(value.row.id))}>Unarchive</Button>
-    }
-    const convertCurrency = (initialPrice) => {
-        return initialPrice
     }
     const addNewProduct = (e) => {
         e.preventDefault();
@@ -98,7 +96,7 @@ const Products = () => {
                 <DataGrid
                     columns={[
                         { field: 'name', headerName: 'Name', flex: 1 },
-                        { field: 'price', headerName: 'Price', width: 150, valueFormatter: (price) => convertCurrency(price.value)},
+                        { field: 'price', headerName: 'Price', width: 150, renderCell: (price) => <PriceFormat initialPrice={price.value} />},
                         { field: 'store', headerName: 'Store', width: 150 },
                         { field: 'date', headerName: 'Estimated delivery', width: 150, valueFormatter: (date) => convertToDate(date.value)},
                         { field: 'actions', headerName: 'Actions', width: 150, sortable: false, filterable: false, renderCell: (value) => {

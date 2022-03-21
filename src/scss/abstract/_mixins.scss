@@ -1,0 +1,22 @@
+@mixin respond($breakpoint) {
+
+    @if $breakpoint == small-phone {
+        @media (max-width: 25em) { @content }; // 400px
+    }
+    @if $breakpoint == phone {
+        @media (max-width: 37.5em) { @content }; // 600px
+    }
+    @if $breakpoint == tablet {
+        @media (max-width: 56.25em) { @content }; // 900px
+    }
+    @if $breakpoint == laptop {
+        @media (max-width: 75em) { @content }; // 1200px
+    }
+    @if $breakpoint == desktop {
+        @media (max-width: 90.1em) {@content}; // 1440px
+    }
+    //reactstrap sizes
+    @if $breakpoint == reactstrap-sm {
+        @media (max-width: 36em) { @content }; // 576px
+    }
+}
