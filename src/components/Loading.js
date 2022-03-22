@@ -7,16 +7,19 @@ const Loading = ({ loading }) => {
     const [opacity, setOpacity] = useState(1)
 
     useEffect(() => {
+        console.log(loading)
         if (loading) {
             setDisplay(true);
             setOpacity(1);
         } else {
-            setOpacity(0);
-            setTimeout(() => {
-                setDisplay(false);
-            }, 1000)
+            setOpacity(0);        
         }
     }, [loading])
+    useEffect(() => {
+        if (opacity === 0 && !loading) {
+            setDisplay(false)
+        }
+    }, [opacity, loading])
     if (display) {
         return(
             <div className='Loading' style={{

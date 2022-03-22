@@ -54,7 +54,6 @@ const Products = () => {
         })
         setNewProductModal(false);
     }
-
     return (
         <div className='Products'>
             <Loading loading={loading} />
