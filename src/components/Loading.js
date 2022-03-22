@@ -7,7 +7,6 @@ const Loading = ({ loading }) => {
     const [opacity, setOpacity] = useState(1)
 
     useEffect(() => {
-        console.log(loading)
         if (loading) {
             setDisplay(true);
             setOpacity(1);
